@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <style>
+            #box {
+                color: #FFF;
+                background-color: #BBB;
+                width: 20em;
+                height: 7em; 
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10em;
+            }
+            #interval {
+                width: 80%;
+                height: 3em;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #feedback {
+                height: 1em;
+                text-align: center;
+            }
+            #start {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+            }
+
+        </style>
+    </head>
+    <body style='background-color: black;'>
+        <div id="box">
+            <p id="feedback">Flash every <span id="step"></span> seconds</p>
+            <input id="interval" type="range" min="1" max="180" step="0.1" onchange="setStep()" readonly />
+            <button id="start" onclick="go()" >Go</button>
+        </div>
+        <script src="jquery.js"></script>
+        <script>
+        function setStep() {
+            document.getElementById('step').innerHTML = document.getElementById('interval').value
+        }
+        function loop(){
+            var body = document.getElementsByTagName('body')[0]
+            body.setAttribute('style', 'background-color: white;')
+            setTimeout(function(){
+                body.setAttribute('style', 'background-color: black;')
+            }, 200)
+            setTimeout(loop, document.getElementById('interval').value * 1000)
+        }
+        function go() {
+            document.getElementById('start').setAttribute('style', 'display: none;')
+            loop()
+        }
+        window.onload = function() {
+            document.getElementById('interval').value = 10
+            setStep(10)
+        }
+        </script>
+    </body>
+</html>
