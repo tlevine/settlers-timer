@@ -4,14 +4,15 @@
             #box {
                 color: #FFF;
                 background-color: #BBB;
-                width: 20em;
-                height: 7em; 
+                padding: 0.1em 2em;
+                width: 14em;
+                height: 8em; 
                 margin-left: auto;
                 margin-right: auto;
                 margin-top: 10em;
             }
             #interval {
-                width: 80%;
+                width: 100%;
                 height: 3em;
                 display: block;
                 margin-left: auto;
@@ -33,10 +34,9 @@
     <body style='background-color: black;'>
         <div id="box">
             <p id="feedback">Flash every <span id="step"></span> seconds</p>
-            <input id="interval" type="range" min="1" max="180" step="0.1" onchange="setStep()" readonly />
+            <input id="interval" type="range" min="1" max="180" step="0.1" onchange="setStep()" />
             <button id="start" onclick="go()" >Go</button>
         </div>
-        <script src="jquery.js"></script>
         <script>
         function setStep() {
             document.getElementById('step').innerHTML = document.getElementById('interval').value
@@ -50,6 +50,7 @@
             setTimeout(loop, document.getElementById('interval').value * 1000)
         }
         function go() {
+            document.getElementById('interval').readOnly = true
             document.getElementById('start').setAttribute('style', 'display: none;')
             loop()
         }
